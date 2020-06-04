@@ -1,0 +1,32 @@
+{
+  "name": "biko-api",
+  "version": "1.0.0",
+  "description": "This a api from Biko Services",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsnd --inspect=0.0.0.0:9229 --clear src/index.ts"
+  },
+  "author": "Christian Corrales",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "pg": "^8.2.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.25",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.6",
+    "@types/joi": "^14.3.4",
+    "@types/knex": "^0.16.1",
+    "@types/node": "^14.0.10",
+    "nodemon": "^2.0.4",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "tslint": "^6.1.2",
+    "typescript": "^3.9.3"
+  }
+}
