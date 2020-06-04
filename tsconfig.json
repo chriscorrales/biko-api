@@ -14,7 +14,7 @@
     "importHelpers": true,
     "inlineSources": true,
     "alwaysStrict": true,
-    "outDir": "./dist",
+    "outDir": "./dist"
   },
   "include": [
     "./src/**/*.ts"
