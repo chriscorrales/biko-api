@@ -10,7 +10,6 @@ app.use(
   cors({
     origin: true,
     credentials: true,
-    methods: 'GET,POST',
     optionsSuccessStatus: 200,
     allowedHeaders: ['Content-Type'],
   })
@@ -18,7 +17,6 @@ app.use(
 
 app.options('*', cors());
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
   logger.error('error', {
     error,

@@ -1,23 +1,35 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, OneToMany, OneToOne } from 'typeorm';
 import { EntityBase } from './Entity';
+import { LegalPerson } from './LegalPerson';
+import { NaturalPerson } from './NaturalPerson';
+import { AddressPeople } from './AddressPeople';
 
-@Entity({ name: 'TPeople' })
+@Entity()
 export class People extends EntityBase {
-    @Column({ name: 'full_name' })
-    public fullName: string;
+  @Column()
+  public fullName: string;
 
-    @Column({ name: 'birthday_date' })
-    public birthdayDate: Date;
+  @Column()
+  public birthdayDate: Date;
 
-    @Column({ name: 'phone' })
-    public phone: string;
+  @Column()
+  public phone: string;
 
-    @Column({ name: 'persontype' })
-    public personType: string;
+  @Column({ enum: ['F', 'J', 'A'] })
+  public personType: string;
 
-    @Column({ name: 'gender' })
-    public gender: string;
+  @Column({ enum: ['F', 'M', 'O'] })
+  public gender: string;
 
-    @Column({ name: 'image' })
-    public image: string;
+  @Column()
+  public image: string;
+
+  @OneToMany(() => AddressPeople, (address) => address.people)
+  public addresses: AddressPeople[];
+
+  @OneToOne(() => LegalPerson, (legalPerson) => legalPerson.people)
+  legalPerson: LegalPerson;
+
+  @OneToOne(() => NaturalPerson, (naturalPerson) => naturalPerson.people)
+  naturalPerson: NaturalPerson;
 }
