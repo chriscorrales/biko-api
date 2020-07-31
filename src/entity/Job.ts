@@ -20,10 +20,10 @@ export class Job extends EntityBase {
   @Column({ length: 350 })
   public description!: string;
 
-  @Column()
-  public status: string;
+  @Column({ type: 'int2' })
+  public status: number;
 
-  @Column()
+  @Column({ nullable: true })
   public dateFinished: Date;
 
   @ManyToMany(() => Freelancer, (freelancer) => freelancer.jobs)

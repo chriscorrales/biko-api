@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import { logger } from './shared/logger';
+import router from './routes';
 
 export const app = express();
 
@@ -10,12 +11,15 @@ app.use(
   cors({
     origin: true,
     credentials: true,
+    methods: 'GET,POST,PUT,DELETE',
     optionsSuccessStatus: 200,
     allowedHeaders: ['Content-Type'],
   })
 );
 
 app.options('*', cors());
+
+app.use(router);
 
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
   logger.error('error', {
