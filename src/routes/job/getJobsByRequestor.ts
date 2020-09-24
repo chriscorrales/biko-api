@@ -7,8 +7,7 @@ export async function getJobsByRequestor(
   next: NextFunction
 ): Promise<void> {
   try {
-    const data = await jobsByRequestor('8921896a-0436-4de0-bbf9-75ace1b2476b');
-    console.log(data);
+    const data = await jobsByRequestor(req.params.id);
     res.status(200).json(data);
   } catch (err) {
     next(err);
