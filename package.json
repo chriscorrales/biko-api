@@ -5,14 +5,19 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsnd --inspect=0.0.0.0:9229 --clear src/index.ts"
+    "dev": "tsnd --inspect=0.0.0.0:9229 --clear src/index.ts",
+    "typeorm": "npx ts-node ./node_modules/typeorm/cli.js"
   },
   "author": "Christian Corrales",
   "license": "ISC",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "argon2": "^0.27.0",
     "axios": "^0.20.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "pg": "^8.3.3",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.28",
@@ -21,9 +26,12 @@
   "devDependencies": {
     "@types/cors": "^2.8.7",
     "@types/express": "^4.17.8",
+    "@types/hapi__joi": "^17.1.6",
     "@types/joi": "^14.3.4",
+    "@types/jsonwebtoken": "^8.5.0",
     "@types/knex": "^0.16.1",
     "@types/node": "^14.11.2",
+    "husky": "^4.3.0",
     "nodemon": "^2.0.4",
     "ts-node-dev": "^1.0.0-pre.63",
     "tslint": "^6.1.3",

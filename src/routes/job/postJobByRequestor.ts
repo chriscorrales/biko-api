@@ -1,13 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
-import { jobsByRequestor } from '../../repository/jobRepository';
+import { createJobByRequestor } from '../../repository/jobRepository';
 
-export async function getJobsByRequestor(
+export async function postJobByRequestor(
   req: Request,
   res: Response,
   next: NextFunction
 ): Promise<void> {
   try {
-    const data = await jobsByRequestor(req.params.id);
+    const data = await createJobByRequestor(req.body);
     res.status(200).json(data);
   } catch (err) {
     next(err);

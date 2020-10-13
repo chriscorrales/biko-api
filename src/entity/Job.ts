@@ -15,10 +15,10 @@ import { AddressJob } from './AddressJob';
 @Entity()
 export class Job extends EntityBase {
   @Column()
-  public title!: string;
+  public title: string;
 
   @Column({ length: 350 })
-  public description!: string;
+  public description: string;
 
   @Column({ type: 'int2' })
   public status: number;
@@ -26,7 +26,9 @@ export class Job extends EntityBase {
   @Column({ nullable: true })
   public dateFinished: Date;
 
-  @ManyToMany(() => Freelancer, (freelancer) => freelancer.jobs)
+  @ManyToMany(() => Freelancer, (freelancer) => freelancer.jobs, {
+    cascade: true,
+  })
   @JoinTable()
   freelancers: Freelancer[];
 
