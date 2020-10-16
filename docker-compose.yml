@@ -31,3 +31,4 @@ services:
       - DB_USER=$DB_USER
       - DB_DATABASE=$DB_DATABASE
       - DB_PORT=$DB_PORT
+      - BIKO_SECRET=$BIKO_SECRET

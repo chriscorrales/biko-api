@@ -6,6 +6,8 @@ const userRepository = getRepository(User);
 const findUserByEmail = async (email: number) =>
   await userRepository.findOne({ where: { email } });
 
-const createUser = async (user: User) => await userRepository.save(user);
+const createUser = (user: User) => userRepository.create(user);
 
-export { findUserByEmail, createUser };
+const saveUser = async (user: User) => await userRepository.save(user);
+
+export { findUserByEmail, createUser, saveUser };
