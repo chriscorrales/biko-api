@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
+import 'express-async-errors';
 import { logger } from './shared/logger';
 import router from './routes';
 
@@ -34,6 +35,6 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
   return res.status(error.statusCode || 500).json(error);
 });
 
-app.listen(3000, () => {
-  logger.info('app started');
+app.listen(4000, () => {
+  logger.info(`app started on port ${4000} 🚀`);
 });

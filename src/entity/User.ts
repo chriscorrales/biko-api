@@ -1,6 +1,14 @@
-import { Entity, Column, BeforeInsert, BeforeUpdate } from 'typeorm';
+import {
+  Entity,
+  Column,
+  BeforeInsert,
+  BeforeUpdate,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
 import { EntityBase } from './Entity';
 import argon2 from 'argon2';
+import { People } from './People';
 
 @Entity()
 export class User extends EntityBase {
@@ -9,6 +17,10 @@ export class User extends EntityBase {
 
   @Column()
   public password: string;
+
+  @OneToOne(() => People)
+  @JoinColumn()
+  people: People;
 
   @BeforeInsert()
   @BeforeUpdate()

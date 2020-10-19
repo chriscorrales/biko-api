@@ -13,23 +13,23 @@ export default function authentication(
   res: Response,
   next: NextFunction
 ) {
-  const { authorization } = req.headers;
-
-  if (!authorization) {
-    return res.sendStatus(401);
-  }
-
-  const token = authorization.replace('Bearer', '').trim();
-
   try {
+    const { authorization } = req.headers;
+
+    if (!authorization) {
+      return res.sendStatus(401);
+    }
+
+    const token = authorization.replace('Bearer', '').trim();
+
     const data = jwt.verify(token, BIKO_SECRET);
 
     const { id } = data as TokenPaylod;
 
     req.userId = id;
 
-    return next();
+    next();
   } catch {
-    return res.sendStatus(401);
+    return res.sendStatus(401).json('Login Required');
   }
 }

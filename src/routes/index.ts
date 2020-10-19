@@ -9,7 +9,9 @@ const router = Router();
 
 router.use(express.json());
 
-router.use('/job', authentication, jobRouter);
+router.use(authentication);
+
+router.use('/job', jobRouter);
 
 router.use('/user', userRouter);
 

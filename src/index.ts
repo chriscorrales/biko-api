@@ -1,10 +1,6 @@
 import { getConnection } from './db';
 
 (async () => {
-  try {
-    await getConnection();
-  } catch (err) {
-    console.log(err);
-  }
+  await getConnection();
   await import('./app');
 })();

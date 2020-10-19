@@ -19,17 +19,12 @@ const options = {
 };
 
 export const logger = winston.createLogger({
-  transports: [
-    new winston.transports.Console(options.console),
-    new winston.transports.File(options.file),
-  ],
+  transports: [new winston.transports.Console(options.console), new winston.transports.File(options.file)],
   exitOnError: false,
 });
 
-export const loggRouter = (route: any) => {
+export const loggRouter = (route: string) => {
   return winston.format.printf((info) => {
-    return `${info.level.toUpperCase()} ${Date.now().toString()} >  ${route}.log | ${
-      info.message
-    }`;
+    return `${info.level.toUpperCase()} ${Date.now().toString()} >  ${route}.log | ${info.message}`;
   });
 };
