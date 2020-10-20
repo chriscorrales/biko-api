@@ -20,6 +20,8 @@ app.use(
 
 app.options('*', cors());
 
+app.use(express.json());
+
 app.use(router);
 
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
@@ -35,6 +37,6 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
   return res.status(error.statusCode || 500).json(error);
 });
 
-app.listen(4000, () => {
+app.listen(3000, () => {
   logger.info(`app started on port ${4000} 🚀`);
 });

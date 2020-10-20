@@ -3,6 +3,7 @@ import { findUserByEmail } from '../repository/userRepository';
 import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
 import { BIKO_SECRET } from '../settings';
+import { userService } from '../services/user';
 const router = Router();
 
 router.options('/');
@@ -22,14 +23,16 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     }
 
     const token = jwt.sign({ id: userExist.id }, BIKO_SECRET, {
-      expiresIn: '1d',
+      expiresIn: '4d',
     });
+
+    const user = userService.userToLogin(userExist);
 
     delete userExist.password;
 
     return res
       .json({
-        userExist,
+        ...user,
         token,
       })
       .status(200);

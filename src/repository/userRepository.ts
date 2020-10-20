@@ -4,7 +4,7 @@ import { User } from '../entity/User';
 const userRepository = getRepository(User);
 
 const findUserByEmail = async (email: number) =>
-  await userRepository.findOne({ where: { email } });
+  await userRepository.findOne({ where: { email }, relations: ['people', 'people.freelancer', 'people.requestor'] });
 
 const createUser = (user: User) => userRepository.create(user);
 

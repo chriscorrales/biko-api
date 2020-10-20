@@ -3,6 +3,8 @@ import { EntityBase } from './Entity';
 import { LegalPerson } from './LegalPerson';
 import { NaturalPerson } from './NaturalPerson';
 import { AddressPeople } from './AddressPeople';
+import { Freelancer } from './Freelancer';
+import { Requestor } from './Requestor';
 
 @Entity()
 export class People extends EntityBase {
@@ -32,4 +34,10 @@ export class People extends EntityBase {
 
   @OneToOne(() => NaturalPerson, (naturalPerson) => naturalPerson.people)
   naturalPerson: NaturalPerson;
+
+  @OneToOne(() => Freelancer, (freelancer) => freelancer.people)
+  freelancer: Freelancer;
+
+  @OneToOne(() => Requestor, (requestor) => requestor.people)
+  requestor: Requestor;
 }
