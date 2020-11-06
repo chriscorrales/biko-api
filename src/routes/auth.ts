@@ -22,20 +22,14 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
       return res.status(401);
     }
 
-    const token = jwt.sign({ id: userExist.id }, BIKO_SECRET, {
-      expiresIn: '4d',
-    });
-
     const user = userService.userToLogin(userExist);
 
     delete userExist.password;
+    const token = jwt.sign(user, BIKO_SECRET, {
+      expiresIn: '4d',
+    });
 
-    return res
-      .json({
-        ...user,
-        token,
-      })
-      .status(200);
+    return res.json(token).status(200);
   } catch (err) {
     console.error(err);
   }

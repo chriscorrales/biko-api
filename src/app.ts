@@ -3,22 +3,14 @@ import cors from 'cors';
 import 'express-async-errors';
 import { logger } from './shared/logger';
 import router from './routes';
+import { allowCors } from './middlewares/allowCors';
 
 export const app = express();
 
 app.disable('etag');
 
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-    methods: 'GET,POST,PUT,DELETE',
-    optionsSuccessStatus: 200,
-    allowedHeaders: ['Content-Type'],
-  })
-);
-
 app.options('*', cors());
+app.use(allowCors);
 
 app.use(express.json());
 

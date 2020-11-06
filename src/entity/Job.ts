@@ -1,16 +1,9 @@
-import {
-  Entity,
-  Column,
-  ManyToMany,
-  ManyToOne,
-  JoinTable,
-  OneToOne,
-  JoinColumn,
-} from 'typeorm';
+import { Entity, Column, ManyToMany, ManyToOne, JoinTable, OneToOne, JoinColumn } from 'typeorm';
 import { EntityBase } from './Entity';
 import { Freelancer } from './Freelancer';
 import { Requestor } from './Requestor';
 import { AddressJob } from './AddressJob';
+import { Category } from './Category';
 
 @Entity()
 export class Job extends EntityBase {
@@ -31,6 +24,9 @@ export class Job extends EntityBase {
   })
   @JoinTable()
   freelancers: Freelancer[];
+
+  @ManyToMany(() => Category, (category) => category.jobs)
+  categorys: Category[];
 
   @ManyToOne(() => Requestor, (requestor) => requestor.jobs)
   requestor: Requestor;
