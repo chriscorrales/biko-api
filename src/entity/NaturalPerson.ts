@@ -7,9 +7,6 @@ export class NaturalPerson extends EntityBase {
   @Column({ name: 'cpf' })
   public cpf: string;
 
-  @Column({ name: 'document_image' })
-  public documentImage: string;
-
   @OneToOne(() => People)
   @JoinColumn()
   people: People;

@@ -22,14 +22,11 @@ export class AddressPeople extends EntityBase {
   @Column()
   public postalCode: string;
 
+  @Column({ nullable: true })
+  public complement: string;
+
   @Column()
   public residenceNumber: number;
-
-  @Column()
-  public name: string;
-
-  @Column()
-  public isFavorite: boolean;
 
   @ManyToOne(() => People, (people) => people.addresses)
   people: People;

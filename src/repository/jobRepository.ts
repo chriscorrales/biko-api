@@ -8,7 +8,7 @@ const findJobById = async (id: number) => await jobRepository.findOne(id);
 const listJobsByRequestor = async (id: string) =>
   await jobRepository.find({
     where: { requestor: id },
-    relations: ['freelancers', 'freelancers.people'],
+    relations: ['vacancies', 'vacancies.category', 'vacancies.freelancers', 'vacancies.freelancers.people'],
   });
 
 const createJobByRequestor = async (data: Job) => {

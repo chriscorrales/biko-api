@@ -7,9 +7,6 @@ export class LegalPerson extends EntityBase {
   @Column()
   public cnpj: string;
 
-  @Column()
-  public documentImage: string;
-
   @OneToOne(() => People)
   @JoinColumn()
   people: People;

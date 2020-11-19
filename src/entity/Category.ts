@@ -1,7 +1,7 @@
-import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, OneToMany } from 'typeorm';
 import { EntityBase } from './Entity';
 import { Freelancer } from './Freelancer';
-import { Job } from './Job';
+import { Vacancy } from './Vacancy';
 
 @Entity()
 export class Category extends EntityBase {
@@ -14,9 +14,6 @@ export class Category extends EntityBase {
   @JoinTable()
   freelancers: Freelancer[];
 
-  @ManyToMany(() => Job, (job) => job.categorys, {
-    cascade: true,
-  })
-  @JoinTable()
-  jobs: Job[];
+  @OneToMany(() => Vacancy, (vacancy) => vacancy.category)
+  vacancies: Vacancy[];
 }

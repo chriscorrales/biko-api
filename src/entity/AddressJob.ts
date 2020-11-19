@@ -25,6 +25,9 @@ export class AddressJob extends EntityBase {
   @Column()
   public residenceNumber: number;
 
+  @Column({ nullable: true })
+  public complement: string;
+
   @OneToOne(() => Job, (job) => job.address)
   public job: Job;
 }

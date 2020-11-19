@@ -1,9 +1,8 @@
-import { Entity, Column, ManyToMany, ManyToOne, JoinTable, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, ManyToOne, OneToOne, JoinColumn, OneToMany } from 'typeorm';
 import { EntityBase } from './Entity';
-import { Freelancer } from './Freelancer';
 import { Requestor } from './Requestor';
 import { AddressJob } from './AddressJob';
-import { Category } from './Category';
+import { Vacancy } from './Vacancy';
 
 @Entity()
 export class Job extends EntityBase {
@@ -19,19 +18,13 @@ export class Job extends EntityBase {
   @Column({ nullable: true })
   public dateFinished: Date;
 
-  @ManyToMany(() => Freelancer, (freelancer) => freelancer.jobs, {
-    cascade: true,
-  })
-  @JoinTable()
-  freelancers: Freelancer[];
-
-  @ManyToMany(() => Category, (category) => category.jobs)
-  categorys: Category[];
-
   @ManyToOne(() => Requestor, (requestor) => requestor.jobs)
   requestor: Requestor;
 
   @OneToOne(() => AddressJob)
   @JoinColumn()
   address: AddressJob;
+
+  @OneToMany(() => Vacancy, (vacancy) => vacancy.job)
+  vacancies: Vacancy[];
 }

@@ -1,7 +1,5 @@
 import { Entity, Column, OneToMany, OneToOne } from 'typeorm';
 import { EntityBase } from './Entity';
-import { LegalPerson } from './LegalPerson';
-import { NaturalPerson } from './NaturalPerson';
 import { AddressPeople } from './AddressPeople';
 import { Freelancer } from './Freelancer';
 import { Requestor } from './Requestor';
@@ -10,6 +8,9 @@ import { Requestor } from './Requestor';
 export class People extends EntityBase {
   @Column()
   public fullName: string;
+
+  @Column({ nullable: true })
+  public cpf: string;
 
   @Column()
   public birthdayDate: Date;
@@ -26,14 +27,17 @@ export class People extends EntityBase {
   @Column()
   public image: string;
 
+  @Column({ nullable: true })
+  public linkedin: string;
+
+  @Column({ nullable: true })
+  public github: string;
+
+  @Column({ nullable: true })
+  public facebook: string;
+
   @OneToMany(() => AddressPeople, (address) => address.people)
   public addresses: AddressPeople[];
-
-  @OneToOne(() => LegalPerson, (legalPerson) => legalPerson.people)
-  legalPerson: LegalPerson;
-
-  @OneToOne(() => NaturalPerson, (naturalPerson) => naturalPerson.people)
-  naturalPerson: NaturalPerson;
 
   @OneToOne(() => Freelancer, (freelancer) => freelancer.people)
   freelancer: Freelancer;
