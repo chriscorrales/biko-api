@@ -1,8 +1,15 @@
 import { Job } from '../entity/Job';
-import { listJobsByRequestor } from '../repository/jobRepository';
+import { Requestor } from '../entity/Requestor';
+import { listJobsByRequestor, saveAddressJob, saveJobByRequestor } from '../repository/jobRepository';
+import DomainError from '../error/domainError';
+import { saveVacancy } from '../repository/vacancyRepository';
 
-export const listJobsWithFreelancers = async (idRequestor: string): Promise<Job[]> => {
-  const list = await listJobsByRequestor(idRequestor);
+export const listJobsWithFreelancers = async (requestor: Requestor): Promise<Job[]> => {
+  if (!requestor) {
+    throw new DomainError(400, 'Requestor is null', {}, 'REQ_A');
+  }
+
+  const list = await listJobsByRequestor(requestor.id);
   const newList = list.map((job) => {
     const freelancers = job.vacancies
       .map((vacancy) => {
@@ -15,4 +22,21 @@ export const listJobsWithFreelancers = async (idRequestor: string): Promise<Job[
   });
 
   return newList;
+};
+
+export const createJobByRequestor = async (body: Job, requestor: Requestor) => {
+  let job: Job;
+
+  if (!!body.address) {
+    const address = await saveAddressJob({ ...body.address });
+    job = await saveJobByRequestor({ ...body, requestor, address });
+  } else {
+    job = await saveJobByRequestor({ ...body, requestor });
+  }
+
+  body.vacancies.forEach(async (vacancy) => {
+    await saveVacancy({ ...vacancy, job: job });
+  });
+
+  return;
 };

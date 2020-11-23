@@ -1,24 +1,16 @@
-import { Request, Response, NextFunction } from 'express';
-import { authService } from '../services/auth';
+import { NextFunction, Request, Response } from 'express';
+import AccessError from '../error/AccessError';
 
-export default function authRequired() {
-  return (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const { authorization } = req.headers;
-
-      if (!authorization) {
-        return res.sendStatus(401);
-      }
-
-      const token = authorization.replace('Bearer', '').trim();
-
-      const { id } = authService.validateToken(token);
-
-      req.userId = id;
-
-      next();
-    } catch {
-      return res.sendStatus(401).json('Login Required');
+export function authRequired(): any {
+  return (req: Request, res: Response, next: NextFunction): any => {
+    if (req.method === 'OPTIONS') {
+      return next();
     }
+
+    if (!req.user) {
+      throw new AccessError('Login Required', 401);
+    }
+
+    next();
   };
 }

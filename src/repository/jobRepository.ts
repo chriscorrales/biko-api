@@ -1,19 +1,25 @@
 import { getRepository } from 'typeorm';
 import { Job } from '../entity/Job';
+import { AddressJob } from '../entity/AddressJob';
 
 const jobRepository = getRepository(Job);
+const addressJobRepository = getRepository(AddressJob);
 
 const findJobById = async (id: number) => await jobRepository.findOne(id);
 
 const listJobsByRequestor = async (id: string) =>
   await jobRepository.find({
     where: { requestor: id },
-    relations: ['vacancies', 'vacancies.category', 'vacancies.freelancers', 'vacancies.freelancers.people'],
+    relations: ['address', 'vacancies', 'vacancies.category', 'vacancies.freelancers', 'vacancies.freelancers.people'],
   });
 
-const createJobByRequestor = async (data: Job) => {
+const saveJobByRequestor = async (data: Job) => {
   data.status = 0;
-  await jobRepository.save(data);
+  return await jobRepository.save(data);
 };
 
-export { findJobById, listJobsByRequestor, createJobByRequestor };
+const saveAddressJob = async (addressJob: AddressJob) => {
+  return await addressJobRepository.save(addressJob);
+};
+
+export { findJobById, listJobsByRequestor, saveJobByRequestor, saveAddressJob };

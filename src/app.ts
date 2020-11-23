@@ -4,6 +4,7 @@ import 'express-async-errors';
 import { logger } from './shared/logger';
 import router from './routes';
 import { allowCors } from './middlewares/allowCors';
+import { bindUser } from './middlewares/bindUser';
 
 export const app = express();
 
@@ -11,6 +12,8 @@ app.disable('etag');
 
 app.options('*', cors());
 app.use(allowCors);
+
+app.use(bindUser);
 
 app.use(express.json());
 

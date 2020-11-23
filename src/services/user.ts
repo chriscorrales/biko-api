@@ -1,11 +1,12 @@
 import { User } from '../entity/User';
+import IUserToken from '../interfaces/user';
 
 class UserService {
-  public userToLogin(user: User) {
+  public userToLogin(user: User): IUserToken {
     const { fullName, personType, image, phone, requestor, freelancer } = user.people;
-    const { email } = user;
+    const { email, id } = user;
 
-    return { email, fullName, personType, image, phone, requestorId: requestor?.id, freelancerId: freelancer?.id };
+    return { id, email, fullName, personType, image, phone, requestor, freelancer };
   }
 }
 

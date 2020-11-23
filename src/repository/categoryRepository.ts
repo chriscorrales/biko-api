@@ -3,12 +3,8 @@ import { Category } from '../entity/Category';
 
 const categoryRepository = getRepository(Category);
 
-const listJobs = async (id: string) =>
-  await categoryRepository.findOne({
-    where: { id },
-    relations: ['vacancies', 'vacancies.job', 'vacancies.selecteds', 'vacancies.freelancers'],
-  });
+const findCategory = async (id: string) => await categoryRepository.findOne({ where: { id } });
 
 const listCategorys = async () => await categoryRepository.find();
 
-export { listJobs, listCategorys };
+export { listCategorys, findCategory };

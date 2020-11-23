@@ -23,7 +23,6 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     }
 
     const user = userService.userToLogin(userExist);
-
     delete userExist.password;
     const token = jwt.sign(user, BIKO_SECRET, {
       expiresIn: '4d',
